@@ -22,9 +22,10 @@ async def on_startup() -> None:
 @dp.message(F.text.lower() == 'начать')  # первая кнопка
 async def start_game(message: Message) -> None:
     record = await db.get_random_record()
-    print(record)
-    muscle = FSInputFile(record)
-    await message.answer_photo(muscle, reply_markup=keyboard.generate_answer_keyboard())
+    print(record[2])
+    kb = await keyboard.generate_list(record[1])
+    muscle = FSInputFile(record[2])
+    await message.answer_photo(muscle, reply_markup=keyboard.generate_answer_keyboard(kb))
 
 
 @dp.message(Command('help'))
