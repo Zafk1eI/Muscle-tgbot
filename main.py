@@ -24,7 +24,7 @@ async def start_game(message: Message) -> None:
     record = await db.get_random_record()
     print(record)
     muscle = FSInputFile(record)
-    await message.answer_photo(muscle, reply_markup=keyboard.il_kb)
+    await message.answer_photo(muscle, reply_markup=keyboard.generate_answer_keyboard())
 
 
 @dp.message(Command('help'))

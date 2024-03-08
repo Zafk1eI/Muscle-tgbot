@@ -1,5 +1,4 @@
 import sqlite3 as sq
-import random
 
 db = sq.connect('muscle.db')
 cursor = db.cursor()
