@@ -24,10 +24,14 @@ async def generate_list(correct_answer):
     return answer
 
 
-def generate_answer_keyboard(answer):
+def generate_answer_keyboard(answer: list, correct_answer):
     builder = InlineKeyboardBuilder()
     for item in answer:
-        builder.add(InlineKeyboardButton(text=item, callback_data='Правильно'))
+        if item == correct_answer:
+            builder.add(InlineKeyboardButton(text=item, callback_data='Правильно'))
+        else:
+            builder.add(InlineKeyboardButton(text=item, callback_data='Неправильно'))
     builder.adjust(2, 2)
     return builder.as_markup(resize_keyboard=True)
+
 
