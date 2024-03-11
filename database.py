@@ -11,7 +11,8 @@ async def db_start() -> None:
                    'name VARCHAR(50),'
                    'image_path TEXT)')
     cursor.execute('CREATE TABLE IF NOT EXISTS users ('
-                   'id_user INTEGER PRIMARY KEY,'
+                   'id_record INTEGER PRIMARY KEY,'
+                   'id_user INTEGER,'
                    'id_muscle INTEGER,'
                    'FOREIGN KEY (id_muscle) REFERENCES muscles (id) ON DELETE CASCADE)')
     db.commit()

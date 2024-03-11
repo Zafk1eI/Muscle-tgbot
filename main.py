@@ -46,6 +46,7 @@ async def send_random_value_no(callback: CallbackQuery) -> None:
     await bot.edit_message_reply_markup(chat_id=callback.from_user.id,
                                         message_id=callback.message.message_id,
                                         reply_markup=None)
+    await db.insert_record(callback.from_user.id, record[0])
 
 
 @dp.message(Command('help'))
