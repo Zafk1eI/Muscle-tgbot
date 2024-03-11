@@ -31,7 +31,7 @@ async def start_game(message: Message) -> None:
 
 
 @dp.callback_query(F.data == "Правильно")
-async def send_random_value_yes(callback: CallbackQuery):
+async def send_random_value_yes(callback: CallbackQuery) -> None:
     await callback.answer()
     await callback.message.answer(text='Молодец, правильно!')
     await bot.edit_message_reply_markup(chat_id=callback.from_user.id,
@@ -40,7 +40,7 @@ async def send_random_value_yes(callback: CallbackQuery):
 
 
 @dp.callback_query(F.data == "Неправильно")
-async def send_random_value_no(callback: CallbackQuery):
+async def send_random_value_no(callback: CallbackQuery) -> None:
     await callback.answer()
     await callback.message.answer(text=f'Неправильно, это {record[1]}')
     await bot.edit_message_reply_markup(chat_id=callback.from_user.id,
@@ -50,7 +50,7 @@ async def send_random_value_no(callback: CallbackQuery):
 
 @dp.message(Command('help'))
 async def command_help(message: Message) -> None:
-    await message.answer('HELP')
+    await message.answer('Для начала нажмите кнопку "НАЧАТЬ"')
 
 
 @dp.message(CommandStart())
@@ -61,7 +61,7 @@ async def command_start_handler(message: Message) -> None:
 Удачи в тестировании своих знаний!''', reply_markup=keyboard.main_kb)
 
 
-async def main():
+async def main() -> None:
     await on_startup()
     await dp.start_polling(bot)
 

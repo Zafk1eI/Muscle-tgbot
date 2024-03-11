@@ -7,8 +7,7 @@ main_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True,
                               input_field_placeholder="Выберете из меню ниже",
                               keyboard=[
                                   [
-                                      KeyboardButton(text="Начать"),
-                                      KeyboardButton(text="QUIZ")
+                                      KeyboardButton(text="Начать")
                                   ]
                               ])
 
@@ -33,5 +32,3 @@ def generate_answer_keyboard(answer: list, correct_answer):
             builder.add(InlineKeyboardButton(text=item, callback_data='Неправильно'))
     builder.adjust(2, 2)
     return builder.as_markup(resize_keyboard=True)
-
-
