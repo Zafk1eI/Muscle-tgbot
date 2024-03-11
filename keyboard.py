@@ -1,13 +1,16 @@
-from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
-                           InlineKeyboardMarkup, InlineKeyboardButton)
-from aiogram.utils.keyboard import InlineKeyboardBuilder
-from database import get_random_record
 import random
+
+from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
+                           InlineKeyboardButton)
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+from database import get_random_record
+
 main_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True,
                               input_field_placeholder="Выберете из меню ниже",
                               keyboard=[
                                   [
-                                      KeyboardButton(text="Начать")
+                                      KeyboardButton(text="Начать"),
                                   ]
                               ])
 
