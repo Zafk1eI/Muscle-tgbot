@@ -16,10 +16,10 @@ async def start_game(message: Message, state: FSMContext) -> None:
     if all_record:
         while await models.UsersMuscles.exists(user_id=message.from_user.id, muscle_id_id=record.id):
             record = await methods.get_random_record()
-            print(record.name)
+            # print(record.name)
         await state.update_data(RECORD_DATA=record)
         image_path = FSInputFile(record.image_path)
-        print(image_path.path)
+        # print(image_path.path)
         answer_list = await kb.generate_list(record.name)
         await message.answer_photo(image_path, reply_markup=kb.generate_answer_keyboard(answer_list, record.name))
     else:
@@ -44,10 +44,10 @@ async def difficult_game(message: Message, state: FSMContext) -> None:
     if await methods.user_has_seen_all_records(message.from_user.id):
         while await models.UsersMuscles.exists(user_id=message.from_user.id, muscle_id_id=record.id):
             record = await methods.get_random_record()
-            print(record.name)
+            # print(record.name)
         await state.update_data(RECORD_DATA=record)
         image_path = FSInputFile(record.image_path)
-        print(image_path.path)
+        # print(image_path.path)
         await message.answer_photo(image_path)
         await message.answer("Напиши ответ при помощи текста")
         await state.set_state(Form.input)
@@ -89,7 +89,7 @@ async def callback_input_data(callback: CallbackQuery, state: FSMContext) -> Non
     await callback.answer()
     data = await state.get_data()
     record = data.get('RECORD_DATA')
-    print("Retrieved record:", record)
+    # print("Retrieved record:", record)
     if callback.data == "Правильно":
         await callback.message.answer(text='Молодец, правильно!')
         if not await models.UsersMuscles.exists(user_id=callback.from_user.id, muscle_id_id=record.id):
