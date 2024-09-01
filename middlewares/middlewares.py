@@ -13,9 +13,10 @@ class UserMiddleware(BaseMiddleware):
     ) -> Any:
         if not event.from_user.id:
             return await event.answer(text='Нужно установить в настройках username, чтобы пользоваться этим ботом')
-        if not models.User.exists(username=event.from_user.username):
-            await models.User.update_or_create(user_id=event.from_user.id,
-                                               username=event.from_user.username,
-                                               answer_count=0
-                                               )
+        if not await models.User.filter(username=event.from_user.username).exists():
+            await models.User.get_or_create(
+                                            user_id=event.from_user.id,
+                                            username=event.from_user.username,
+                                            answer_count=0
+            )
         return await handler(event, data)

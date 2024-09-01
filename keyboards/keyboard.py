@@ -2,17 +2,20 @@ from db import methods
 from random import shuffle
 from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardButton, InlineKeyboardMarkup)
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
 
-main_kb = ReplyKeyboardMarkup(resize_keyboard=True, is_persistent=True,
-                              input_field_placeholder="Выберете из меню ниже",
-                              keyboard=[
-                                  [
-                                      KeyboardButton(text="Начать"),
-                                      KeyboardButton(text="Топ")
-                                  ],
-                              ])
+def main_keyboard(all_records: bool) -> ReplyKeyboardMarkup:
+    builder = ReplyKeyboardBuilder()
+    if all_records:
+        builder.add(KeyboardButton(text="Начать"))
+        builder.add(KeyboardButton(text="Топ"))
+    else:
+        builder.add(KeyboardButton(text="вопрос"))
+        builder.add(KeyboardButton(text="Топ"))
+        builder.add(KeyboardButton(text="назад"))
+    builder.adjust(1, 2)
+    return builder.as_markup(resize_keyboard=True)
 
 
 async def generate_list(correct_answer: str) -> list:
